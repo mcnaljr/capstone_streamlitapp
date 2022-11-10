@@ -22,7 +22,7 @@ def ingredient_list(ings):
     
     # Find common pairings
     ingdf['common pairings'] = ''
-    with open('streamlit_app/models/common_pairs.json','r') as f:
+    with open('models/common_pairs.json','r') as f:
         most_common_pairs = json.load(f)
     for i,ing in enumerate(ings):
         ing_pairs = [x for x in most_common_pairs if ing in x]

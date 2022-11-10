@@ -9,7 +9,7 @@ import json
 import spacy
 
 
-relpath = 'C:/Users/jrmcn/MADS/MADS_Capstone/m2/Supervised_Ingredient_Prediction/'
+relpath = 'models/'
 model = tf.keras.models.load_model(relpath+'model_reduced_e20_full.h5', compile=False)
 test_titles = ['chocolate cake', 'chocolate brownies', 'chicken noodle soup', 'mac and cheese', 'chicken diable']
 thresh = 0.015

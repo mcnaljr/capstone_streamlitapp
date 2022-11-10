@@ -4,7 +4,7 @@ import app_predict
 import app_identify
 import app_charts
 
-modelpath = 'streamlit_app/models/'
+modelpath = 'models/'
 
 st.markdown('# RecSquared Recipe Exploration')
 st.text('A place to learn about your favorite recipes and explore new ones')
