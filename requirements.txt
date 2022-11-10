@@ -6,6 +6,6 @@ pickleshare==0.7.5
 sklearn==0.0
 gensim==4.2.0
 tensorflow
-spacy>=2.2.0,<3.0.0
-https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.2.0/en_core_web_sm-2.2.0.tar.gz#egg=en_core_web_sm
+spacy==3.4.1
+en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.4.0/en_core_web_sm-3.4.0-py3-none-any.whl
 streamlit==1.13.0
