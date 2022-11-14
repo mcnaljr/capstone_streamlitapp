@@ -40,8 +40,9 @@ def create_topcharts(test_title):
     w2vchart = app_charts.pie_chart(w2v_cuisines)
     return ings, ingdf, ldachart, w2vchart
 
-with st.spinner('running'):
-    if test_title != '':
+
+if test_title != '':
+    with st.spinner('running'):
         # get outputs from above function
         ings, ingdf, ldachart, w2vchart = create_topcharts(test_title)
 
@@ -59,7 +60,7 @@ with st.spinner('running'):
             piechart = w2vchart
         pie_col.altair_chart(piechart)
 
-
+    with st.spinner('running'):
         ## t-SNE plot
         # load pre calculated df for t-SNE with n top words
         @st.cache
