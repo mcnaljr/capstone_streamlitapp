@@ -9,8 +9,8 @@ modelpath = 'models/'
 st.markdown('# RecSquared Recipe Exploration')
 st.text('A place to learn about your favorite recipes and explore new ones')
 
-tab1, tab2 = st.tabs(['Recipe Information','Ingredient Exploration'])
-col1, col2 = tab1.columns(2, gap='small')
+# tab1 = st.tabs(['Recipe Information'])
+col1, col2 = st.columns(2, gap='small')
 test_title = col1.text_input('Enter A Dish Name: ')
 col2.button('Upload a picture [placeholder]')
 
@@ -40,15 +40,15 @@ col2.altair_chart(piechart)
 @st.cache
 def load_df(n_topwords):
     return pd.read_csv(modelpath+'tsne_plot/tsnedf_{}.csv'.format(n_topwords))
-n_topwords = tab1.slider('Select Number of Top Words per Label',5,30,15, step=5)
+n_topwords = st.slider('Select Number of Top Words per Label',5,30,15, step=5)
 df = load_df(n_topwords)
 
 # create df for predicted recipe
 recipedf = app_identify.df_plot(test_title,ings,n_topwords)
 combined, combined_notext = app_charts.tSNE_chart(df, recipedf)
 
-tab1.text('Shift-click multiple labels in the legend\nClick in chart to reset')
-if tab1.checkbox('Show words', value=True):
-    tab1.altair_chart(combined, use_container_width=True)
+st.text('Shift-click multiple labels in the legend\nClick in chart to reset')
+if st.checkbox('Show words', value=True):
+    st.altair_chart(combined, use_container_width=True)
 else:
-    tab1.altair_chart(combined_notext)
+    st.altair_chart(combined_notext)

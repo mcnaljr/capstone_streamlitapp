@@ -28,14 +28,14 @@ def ingredient_list(ings):
         ing_pairs = [x for x in most_common_pairs if ing in x]
         pairings = [x if x != ing else y for x,y in ing_pairs]
         res = [i for n, i in enumerate(pairings) if i not in pairings[:n]][:5] # remove duplicates and take top 5
-        ingdf.at[i,'common_pairings'] = ', '.join(res)
+        ingdf.at[i,'common pairings'] = ', '.join(res)
 
     height = len(ings)*30
     width = len(max(ings))*20
     ingredient_list = alt.Chart(ingdf).mark_text(fontSize=20, fontWeight='bold', align='center', color='gray').encode(
         text = 'ingredient:N',
         y = alt.Y('y:O', axis=None),
-        tooltip = ['common_pairings:N']
+        tooltip = ['common pairings:N']
     ).configure_axis(grid=False).configure_view(strokeWidth=0).properties(
         height=height,
         width=width
