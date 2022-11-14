@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import altair as alt
 import json
+import streamlit as st
 
 
 # ingredient list
@@ -16,6 +17,7 @@ def ingredient_list(ings):
     returns:
     ingredient_list - altair mark_text chart
     '''
+
     ingdf = pd.DataFrame(ings)
     ingdf.rename(columns={0:'ingredient'}, inplace=True)
     ingdf['y'] = range(ingdf.shape[0])
