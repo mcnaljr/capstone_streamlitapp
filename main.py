@@ -66,16 +66,30 @@ if test_title != '':
         @st.cache
         def load_df(n_topwords):
             return pd.read_csv(modelpath+'tsne_plot/tsnedf_{}.csv'.format(n_topwords))
-        n_topwords = st.slider('Select Number of Top Words per Label',5,30,15, step=5)
+        
+        space, tsne_col, space2 = st.columns([1,100,1]) # this is to render the graph above the slider
+        tsne_col.markdown('### Ingredients Plotted in Vector Space')
+        tsne_col.markdown('''Below is a plot that shows the top words for each label plotted with one another.
+        Words and clusters that are closer together are more closely related than those further apart.''')
+        tsne_col.markdown('''
+Graph Instructions:
+- Scroll mousewheel to zoom
+- Click and drag to pan
+- Click (or shift-click for multiple) on labels in legend to highlight points
+- Click arrows in top right to use full screen mode''')
+        tsne_col.markdown('')
+
+        checkbox_col, slider_col = st.columns([1,3])
+        n_topwords = slider_col.slider('Select Number of Top Words per Label',5,20,5, step=5)
         df = load_df(n_topwords)
 
         # create df for predicted recipe
         recipedf = app_identify.df_plot(test_title,ings,n_topwords)
         combined, combined_notext = app_charts.tSNE_chart(df, recipedf)
 
-        st.markdown('Shift-click multiple labels in the legend')
-        st.markdown('Click in chart to reset')
-        if st.checkbox('Show words', value=True):
-            st.altair_chart(combined, use_container_width=True)
+        checkbox_col.text('') # formatting
+        checkbox_col.text('') # formatting
+        if checkbox_col.checkbox('Show words', value=True):
+            tsne_col.altair_chart(combined, use_container_width=True)
         else:
-            st.altair_chart(combined_notext)
+            tsne_col.altair_chart(combined_notext)

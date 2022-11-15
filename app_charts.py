@@ -2,7 +2,6 @@ import pandas as pd
 import numpy as np
 import altair as alt
 import json
-import streamlit as st
 
 
 # ingredient list
@@ -82,10 +81,10 @@ def tSNE_chart(df,recipedf):
         )
 
     # predicted recipe point
-    recipe = alt.Chart(recipedf).mark_point().encode(
+    recipe = alt.Chart(recipedf).mark_point(fill='white',stroke='gray').encode(
             x = 'x:Q',
             y = 'y:Q',
-            color = alt.value('white'),
+            # color = alt.value('white'),
             shape = alt.value('diamond'),
             # size = alt.Size('distinction:N', scale=alt.Scale(range=[15,30]))
             #tooltip = ['word','label',],
