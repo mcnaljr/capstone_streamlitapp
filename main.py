@@ -77,7 +77,6 @@ Graph Instructions:
 - Click and drag to pan
 - Click (or shift-click for multiple) on labels in legend to highlight points
 - Click arrows in top right to use full screen mode''')
-        tsne_col.markdown('')
 
         checkbox_col, slider_col = st.columns([1,3])
         n_topwords = slider_col.slider('Select Number of Top Words per Label',5,20,5, step=5)
@@ -92,4 +91,4 @@ Graph Instructions:
         if checkbox_col.checkbox('Show words', value=True):
             tsne_col.altair_chart(combined, use_container_width=True)
         else:
-            tsne_col.altair_chart(combined_notext)
+            tsne_col.altair_chart(combined_notext, use_container_width=True)

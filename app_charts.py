@@ -70,9 +70,9 @@ def tSNE_chart(df,recipedf):
     legend = alt.selection_multi(fields=['label'], bind='legend')
 
     # main t-SNE chart
-    c = alt.Chart(df).mark_circle(size=60).encode(
-            x = 'x:Q',
-            y = 'y:Q',
+    c = alt.Chart(df).mark_circle(size=60,stroke='black', strokeWidth=.25).encode(
+            x = alt.X('x:Q', axis=None),
+            y = alt.Y('y:Q', axis=None),
             color = alt.condition(legend | mouse,'label:N',alt.value('gray')),#'label:N',
             #tooltip = ['word','label',],
             )        
@@ -89,7 +89,7 @@ def tSNE_chart(df,recipedf):
             # size = alt.Size('distinction:N', scale=alt.Scale(range=[15,30]))
             #tooltip = ['word','label',],
             )
-    t_r = recipe.mark_text(dy=-15,fontWeight='bold',fill='white',stroke='black').encode(
+    t_r = recipe.mark_text(dy=-15,fontWeight='bold',fill='white',stroke='black',strokeWidth=.85).encode(
         text=alt.Text('label:N'),
         size = alt.Size('distinction:N', scale=alt.Scale(range=[15,25]), legend=None)
     )
@@ -102,12 +102,24 @@ def tSNE_chart(df,recipedf):
             ).configure_legend(
                 labelFontSize=18,
                 orient='left',
+            ).configure_view(
+                strokeWidth = 0
             ).properties(
                 height=600,
-                width = 800
+                width = 700
             )
 
-    combined_notext = (c+recipe+t_r).interactive().add_selection(
+    c_notext = alt.Chart(df).mark_circle(size=120).encode(
+            x = alt.X('x:Q', axis=None),
+            y = alt.Y('y:Q', axis=None),
+            color = alt.condition(legend | mouse,'label:N',alt.value('gray')),#'label:N',
+            #tooltip = ['word','label',],
+            )        
+    t = c.mark_text(dy=8, fontSize=10).encode(
+        text=alt.condition(legend | mouse,'word:N',alt.value('')),
+        )
+
+    combined_notext = (c_notext+recipe+t_r).interactive().add_selection(
         mouse, legend
         ).configure_axis(
         grid=False
