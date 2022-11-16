@@ -130,5 +130,7 @@ def tSNE_chart(df,recipedf):
             height=600,
             width = 1000
         )
+    
+    combined.save('tsne.html')
 
     return combined, combined_notext
